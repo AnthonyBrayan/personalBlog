@@ -28,7 +28,7 @@ textarea {
     box-sizing: border-box;
 }
 
-button[type="button"]{
+button[type="button"] {
     background-color: #4CAF50;
     color: white;
     padding: 10px 16px;
@@ -114,4 +114,31 @@ img {
     border: none;
     border-radius: 3px;
     cursor: pointer;
+}
+
+#btn-eliminar {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 50px;
+}
+
+#btn-modificar {
+    background-color: blue;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 50px;
+}
+
+
+/* Estilos para pantallas más pequeñas */
+@media screen and (max-width: 768px) {
+    li {
+        width: 100%;
+        display: flexbox
+    }
 }

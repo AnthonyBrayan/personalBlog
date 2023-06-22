@@ -64,12 +64,14 @@ function appendItemToList(item) {
 
   var botonEliminar = document.createElement("button");
   botonEliminar.textContent = "Eliminar";
+  botonEliminar.id = "btn-eliminar";
   botonEliminar.addEventListener("click", function () {
     eliminarItem(item);
   });
 
   var botonModificar = document.createElement("button");
   botonModificar.textContent = "Modificar";
+  botonModificar.id = "btn-modificar";
   botonModificar.addEventListener("click", function () {
     modificarItem(item);
   });
