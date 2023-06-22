@@ -67,7 +67,7 @@ html {
 }
 
 .footer {
-    align-items: center;
+    /* align-items: center; */
     display: flex;
     justify-content: space-around;
     background-color: #AED6F1;
@@ -78,6 +78,7 @@ html {
 .footer__div-social-media {
     display: flex;
     justify-content: space-around;
+    align-items: center;
 }
 
 .footer__img-social-media {
