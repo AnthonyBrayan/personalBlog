@@ -1,3 +1,28 @@
+var loginForm = document.getElementById("login-form");
+var adminContent = document.getElementById("admin-content");
+
+loginForm.addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  var username = document.getElementById("username").value;
+  var password = document.getElementById("password").value;
+
+  if (username === "miusuario" && password === "micontraseña") {
+    // Inicio de sesión exitoso
+    loginForm.style.display = "none"; // Ocultar formulario de inicio de sesión
+    adminContent.style.display = "block"; // Mostrar contenido de administración
+    cargarItemsEnPagina();
+    mostrarFormularioAgregar();
+  } else {
+    // Credenciales inválidas
+    alert("Credenciales de inicio de sesión incorrectas");
+  }
+
+  // Limpiar campos de inicio de sesión
+  document.getElementById("username").value = "";
+  document.getElementById("password").value = "";
+});
+
 function agregarItem() {
   var titulo = document.getElementById("titulo").value;
   var imagen = document.getElementById("imagen").files[0];
@@ -154,42 +179,42 @@ function clearFormFields() {
 }
 
 function cargarItems() {
-    var storedItems = JSON.parse(localStorage.getItem("items")) || [];
-    var listaItems = document.getElementById("lista-items");
-  
-    storedItems.forEach(function (item) {
-      var listItem = document.createElement("li");
-  
-      var elementoTitulo = document.createElement("h2");
-      elementoTitulo.textContent = item.titulo;
-  
-      var elementoImagen = document.createElement("img");
-      elementoImagen.src = obtenerImagenLocal(item.imagen) || elementoImagen.src;
-      elementoImagen.alt = item.titulo;
-  
-      var elementoDescripcion = document.createElement("p");
-      elementoDescripcion.textContent = item.descripcion;
-  
-      var botonEliminar = document.createElement("button");
-      botonEliminar.textContent = "Eliminar";
-      botonEliminar.addEventListener("click", function () {
-        eliminarItem(item);
-      });
-  
-      var botonModificar = document.createElement("button");
-      botonModificar.textContent = "Modificar";
-      botonModificar.addEventListener("click", function () {
-        modificarItem(item);
-      });
-  
-      listItem.appendChild(elementoTitulo);
-      listItem.appendChild(elementoImagen);
-      listItem.appendChild(elementoDescripcion);
-      listItem.appendChild(botonEliminar);
-      listItem.appendChild(botonModificar);
-  
-      listaItems.appendChild(listItem);
+  var storedItems = JSON.parse(localStorage.getItem("items")) || [];
+  var listaItems = document.getElementById("lista-items");
+
+  storedItems.forEach(function (item) {
+    var listItem = document.createElement("li");
+
+    var elementoTitulo = document.createElement("h2");
+    elementoTitulo.textContent = item.titulo;
+
+    var elementoImagen = document.createElement("img");
+    elementoImagen.src = obtenerImagenLocal(item.imagen) || elementoImagen.src;
+    elementoImagen.alt = item.titulo;
+
+    var elementoDescripcion = document.createElement("p");
+    elementoDescripcion.textContent = item.descripcion;
+
+    var botonEliminar = document.createElement("button");
+    botonEliminar.textContent = "Eliminar";
+    botonEliminar.addEventListener("click", function () {
+      eliminarItem(item);
     });
+
+    var botonModificar = document.createElement("button");
+    botonModificar.textContent = "Modificar";
+    botonModificar.addEventListener("click", function () {
+      modificarItem(item);
+    });
+
+    listItem.appendChild(elementoTitulo);
+    listItem.appendChild(elementoImagen);
+    listItem.appendChild(elementoDescripcion);
+    listItem.appendChild(botonEliminar);
+    listItem.appendChild(botonModificar);
+
+    listaItems.appendChild(listItem);
+  });
 }
 
 function cargarItemsEnPagina() {
