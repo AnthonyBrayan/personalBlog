@@ -1,0 +1,42 @@
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Items con Imágenes</title>
+        <link rel="stylesheet" href="/styles/admin.css">
+    </head>
+    <body>
+        <h1>Mis Items</h1>
+        
+        <form id="item-form">
+            <label for="titulo">Título:</label>
+            <input type="text" id="titulo" name="titulo" required><br>
+            
+            <label for="imagen">Imagen:</label>
+            <input type="file" id="imagen" name="imagen" accept="image/*" required><br>
+            
+            <label for="descripcion">Descripción:</label><br>
+            <textarea id="descripcion" name="descripcion" rows="4" cols="50" required></textarea><br>
+            
+            <button type="button" id="agregar-item" onclick="agregarItem()">Agregar Item</button>
+        </form>
+        
+
+        
+        <form id="modificar-form" style="display: none;">
+            <label for="titulo-modificar">Título:</label>
+            <input type="text" id="titulo-modificar" name="titulo-modificar" required><br>
+            
+            <label for="imagen-modificar">Imagen:</label>
+            <input type="file" id="imagen-modificar" name="imagen-modificar" accept="image/*"><br>
+            
+            <label for="descripcion-modificar">Descripción:</label><br>
+            <textarea id="descripcion-modificar" name="descripcion-modificar" rows="4" cols="50" required></textarea><br>
+            
+            <input type="button" value="Guardar Cambios" id="guardar-cambios">
+        </form>
+
+        <ul id="lista-items"></ul>
+        
+        <script src="/scripts/admin.js"></script>
+    </body>
+    </html>

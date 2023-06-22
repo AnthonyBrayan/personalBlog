@@ -21,10 +21,8 @@
         </label>
 
         <nav class="header__menu">
-            <a class="header__item" href="#">Inicio</a>
-            <a class="header__item" href="#">Sobre nosotros</a>
-            <a class="header__item" href="views/blog.html">Blog</a>
-            <a class="header__item" href="#">Contacto</a>
+            <a class="header__item" href="#" onclick="cargarContenido('views/blog.html', 'container');">Blog</a>
+            <a class="header__item" href="#"onclick="cargarContenido('views/admin.html', 'container');">Admin</a>
 
             <label for="check" class="header__label-iconX">
                 &#215
@@ -33,6 +31,10 @@
         </nav>
 
     </header>
+
+    <div id="container">
+
+    </div>
 
     <div class="container-free">
 
