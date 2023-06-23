@@ -1,3 +1,24 @@
+var loginForm = document.getElementById("login-form");
+var adminContent = document.getElementById("admin-content");
+
+loginForm.addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  var username = document.getElementById("username").value;
+  var password = document.getElementById("password").value;
+
+  if (username === "anthony" && password === "123") {
+    loginForm.style.display = "none";
+    adminContent.style.display = "block";
+    cargarItems();
+  } else {
+    alert("Credenciales de inicio de sesión incorrectas");
+  }
+
+  document.getElementById("username").value = "";
+  document.getElementById("password").value = "";
+});
+
 function agregarItem() {
   var titulo = document.getElementById("titulo").value;
   var imagen = document.getElementById("imagen").files[0];
@@ -9,10 +30,9 @@ function agregarItem() {
     descripcion: descripcion,
   };
 
-  // Verificar si se seleccionó una imagen
   if (imagen) {
-    newItem.imagen = imagen.name; // Guardar el nombre del archivo en el objeto newItem
-    guardarImagenLocal(imagen); // Guardar la imagen en localStorage
+    newItem.imagen = imagen.name;
+    guardarImagenLocal(imagen);
   }
 
   var storedItems = JSON.parse(localStorage.getItem("items")) || [];
@@ -39,12 +59,14 @@ function appendItemToList(item) {
 
   var botonEliminar = document.createElement("button");
   botonEliminar.textContent = "Eliminar";
+  botonEliminar.id = "btn-eliminar";
   botonEliminar.addEventListener("click", function () {
     eliminarItem(item);
   });
 
   var botonModificar = document.createElement("button");
   botonModificar.textContent = "Modificar";
+  botonModificar.id = "btn-modificar";
   botonModificar.addEventListener("click", function () {
     modificarItem(item);
   });
@@ -90,7 +112,6 @@ function modificarItem(item) {
       storedItems[index].titulo = nuevoTitulo;
       storedItems[index].descripcion = nuevaDescripcion;
 
-      // Verificar si se seleccionó una nueva imagen
       if (nuevaImagen) {
         storedItems[index].imagen = nuevaImagen.name;
         guardarImagenLocal(nuevaImagen);
@@ -154,69 +175,40 @@ function clearFormFields() {
 }
 
 function cargarItems() {
-    var storedItems = JSON.parse(localStorage.getItem("items")) || [];
-    var listaItems = document.getElementById("lista-items");
-  
-    storedItems.forEach(function (item) {
-      var listItem = document.createElement("li");
-  
-      var elementoTitulo = document.createElement("h2");
-      elementoTitulo.textContent = item.titulo;
-  
-      var elementoImagen = document.createElement("img");
-      elementoImagen.src = obtenerImagenLocal(item.imagen) || elementoImagen.src;
-      elementoImagen.alt = item.titulo;
-  
-      var elementoDescripcion = document.createElement("p");
-      elementoDescripcion.textContent = item.descripcion;
-  
-      var botonEliminar = document.createElement("button");
-      botonEliminar.textContent = "Eliminar";
-      botonEliminar.addEventListener("click", function () {
-        eliminarItem(item);
-      });
-  
-      var botonModificar = document.createElement("button");
-      botonModificar.textContent = "Modificar";
-      botonModificar.addEventListener("click", function () {
-        modificarItem(item);
-      });
-  
-      listItem.appendChild(elementoTitulo);
-      listItem.appendChild(elementoImagen);
-      listItem.appendChild(elementoDescripcion);
-      listItem.appendChild(botonEliminar);
-      listItem.appendChild(botonModificar);
-  
-      listaItems.appendChild(listItem);
-    });
-}
-
-function cargarItemsEnPagina() {
-  var listaItems = document.getElementById("lista-items-blog");
-
   var storedItems = JSON.parse(localStorage.getItem("items")) || [];
+  var listaItems = document.getElementById("lista-items");
 
   storedItems.forEach(function (item) {
     var listItem = document.createElement("li");
 
-    var tituloElement = document.createElement("h2");
-    tituloElement.textContent = item.titulo;
+    var elementoTitulo = document.createElement("h2");
+    elementoTitulo.textContent = item.titulo;
 
-    var imagenElement = document.createElement("img");
-    imagenElement.src = obtenerImagenLocal(item.imagen) || "";
-    imagenElement.alt = item.titulo;
+    var elementoImagen = document.createElement("img");
+    elementoImagen.src = obtenerImagenLocal(item.imagen) || elementoImagen.src;
+    elementoImagen.alt = item.titulo;
 
-    var descripcionElement = document.createElement("p");
-    descripcionElement.textContent = item.descripcion;
+    var elementoDescripcion = document.createElement("p");
+    elementoDescripcion.textContent = item.descripcion;
 
-    listItem.appendChild(tituloElement);
-    listItem.appendChild(imagenElement);
-    listItem.appendChild(descripcionElement);
+    var botonEliminar = document.createElement("button");
+    botonEliminar.textContent = "Eliminar";
+    botonEliminar.addEventListener("click", function () {
+      eliminarItem(item);
+    });
+
+    var botonModificar = document.createElement("button");
+    botonModificar.textContent = "Modificar";
+    botonModificar.addEventListener("click", function () {
+      modificarItem(item);
+    });
+
+    listItem.appendChild(elementoTitulo);
+    listItem.appendChild(elementoImagen);
+    listItem.appendChild(elementoDescripcion);
+    listItem.appendChild(botonEliminar);
+    listItem.appendChild(botonModificar);
 
     listaItems.appendChild(listItem);
   });
 }
-
-cargarItems();
-cargarItemsEnPagina();
