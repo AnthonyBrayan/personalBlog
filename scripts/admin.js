@@ -7,18 +7,14 @@ loginForm.addEventListener("submit", function (event) {
   var username = document.getElementById("username").value;
   var password = document.getElementById("password").value;
 
-  if (username === "miusuario" && password === "micontraseña") {
-    // Inicio de sesión exitoso
-    loginForm.style.display = "none"; // Ocultar formulario de inicio de sesión
-    adminContent.style.display = "block"; // Mostrar contenido de administración
-    cargarItemsEnPagina();
-    mostrarFormularioAgregar();
+  if (username === "anthony" && password === "123") {
+    loginForm.style.display = "none";
+    adminContent.style.display = "block";
+    cargarItems();
   } else {
-    // Credenciales inválidas
     alert("Credenciales de inicio de sesión incorrectas");
   }
 
-  // Limpiar campos de inicio de sesión
   document.getElementById("username").value = "";
   document.getElementById("password").value = "";
 });
@@ -34,10 +30,9 @@ function agregarItem() {
     descripcion: descripcion,
   };
 
-  // Verificar si se seleccionó una imagen
   if (imagen) {
-    newItem.imagen = imagen.name; // Guardar el nombre del archivo en el objeto newItem
-    guardarImagenLocal(imagen); // Guardar la imagen en localStorage
+    newItem.imagen = imagen.name;
+    guardarImagenLocal(imagen);
   }
 
   var storedItems = JSON.parse(localStorage.getItem("items")) || [];
@@ -117,7 +112,6 @@ function modificarItem(item) {
       storedItems[index].titulo = nuevoTitulo;
       storedItems[index].descripcion = nuevaDescripcion;
 
-      // Verificar si se seleccionó una nueva imagen
       if (nuevaImagen) {
         storedItems[index].imagen = nuevaImagen.name;
         guardarImagenLocal(nuevaImagen);
@@ -218,32 +212,3 @@ function cargarItems() {
     listaItems.appendChild(listItem);
   });
 }
-
-function cargarItemsEnPagina() {
-  var listaItems = document.getElementById("lista-items-blog");
-
-  var storedItems = JSON.parse(localStorage.getItem("items")) || [];
-
-  storedItems.forEach(function (item) {
-    var listItem = document.createElement("li");
-
-    var tituloElement = document.createElement("h2");
-    tituloElement.textContent = item.titulo;
-
-    var imagenElement = document.createElement("img");
-    imagenElement.src = obtenerImagenLocal(item.imagen) || "";
-    imagenElement.alt = item.titulo;
-
-    var descripcionElement = document.createElement("p");
-    descripcionElement.textContent = item.descripcion;
-
-    listItem.appendChild(tituloElement);
-    listItem.appendChild(imagenElement);
-    listItem.appendChild(descripcionElement);
-
-    listaItems.appendChild(listItem);
-  });
-}
-
-cargarItems();
-cargarItemsEnPagina();

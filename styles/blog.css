@@ -87,6 +87,6 @@ img {
 @media screen and (max-width: 768px) {
     li {
         width: 100%;
-        display: flexbox
+        display: flexbox;
     }
 }
